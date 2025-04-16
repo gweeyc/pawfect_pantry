@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Product{% endblock %}
+
+{% block content %}
+<style>
+    .update-product-container {
+        max-width: 900px;
+        margin: 60px auto;
+        padding: 40px;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .update-product-container h2 {
+        font-weight: 700;
+        font-size: 2rem;
+        margin-bottom: 30px;
+        text-align: center;
+        color: #212529;
+    }
+
+    .update-product-container label {
+        font-weight: 600;
+        margin-bottom: 6px;
+        display: block;
+        color: #333;
+    }
+
+    .update-product-container input,
+    .update-product-container textarea,
+    .update-product-container select {
+        width: 100%;
+        border-radius: 10px;
+        padding: 10px 12px;
+        font-size: 1rem;
+        border: 1px solid #ced4da;
+        box-shadow: none;
+    }
+
+    .update-product-container input:focus,
+    .update-product-container textarea:focus,
+    .update-product-container select:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.2);
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 12px;
+        font-weight: 600;
+        font-size: 1rem;
+        border-radius: 12px;
+        background-color: #0d6efd;
+        border: none;
+        transition: background-color 0.2s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0b5ed7;
+    }
+
+    .text-danger.small {
+        margin-top: 5px;
+    }
+</style>
+
+<div class="update-product-container">
+    <h2>Update Product</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            {% for field in form %}
+                {% if field.name == "description" or field.name == "image" %}
+                    <div class="col-12 mb-4">
+                {% else %}
+                    <div class="col-md-6 mb-4">
+                {% endif %}
+                        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="text-danger small mt-1">{{ field.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-primary">Update Product</button>
+    </form>
+</div>
+{% endblock %}

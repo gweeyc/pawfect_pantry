@@ -1,0 +1,63 @@
+ 
+  .feedback-section {
+    margin-top: 40px;
+  }
+  
+  .feedback-section h3 {
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .feedback-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f7f7f7;
+    border-left: 4px solid #0077cc;
+    border-radius: 8px;
+  }
+  
+  .badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: white;
+    margin-top: 5px;
+  }
+  
+  .bg-success { background-color: #28a745; }
+  .bg-danger { background-color: #dc3545; }
+  .bg-secondary { background-color: #6c757d; }
+  
+  .feedback-form textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+  
+  .feedback-form textarea:focus {
+    outline: none;
+    border-color: #0077cc;
+    box-shadow: 0 0 0 0.15rem rgba(0, 119, 204, 0.2);
+  }
+  
+  .feedback-form button {
+    width: 100%;
+    background-color: #0077cc;
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-top: 10px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .feedback-form button:hover {
+    background-color: #005fa3;
+  }
+  

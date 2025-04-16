@@ -1,0 +1,35 @@
+.product-filter-form {
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 800px;
+  }
+  
+  .product-filter-form input,
+  .product-filter-form select {
+    margin: 10px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 200px;
+  }
+  
+  .product-filter-form button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .product-filter-form button:hover {
+    background-color: #218838;
+  }
+  

@@ -1,0 +1,18 @@
+.about-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    line-height: 1.7;
+    font-size: 1.1rem;
+    color: #444;
+  }
+  
+  .about-container h2 {
+    color: #0077cc;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  

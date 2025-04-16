@@ -1,0 +1,74 @@
+/* Container styling */
+.order-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Title */
+.order-container h2 {
+  color: #0077cc;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+/* Paragraphs */
+.order-container p {
+  margin: 10px 0;
+  line-height: 1.6;
+}
+
+/* Bold labels */
+.order-label {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Total highlight */
+.order-highlight {
+  font-size: 1.2rem;
+  color: #28a745;
+}
+
+/* Sections (e.g., shipping, notes, items) */
+.order-section {
+  margin-top: 30px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+}
+
+/* Table styling for items */
+.order-items-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.order-items-table th,
+.order-items-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.order-items-table th {
+  background-color: #f5f5f5;
+}
+
+/* Mobile-friendly tweaks */
+@media (max-width: 768px) {
+  .order-container {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .order-items-table th,
+  .order-items-table td {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+}

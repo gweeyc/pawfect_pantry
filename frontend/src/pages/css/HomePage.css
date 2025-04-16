@@ -1,0 +1,40 @@
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+}
+
+.welcome-card {
+  background-color: #ffffff;
+  padding: 40px 50px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  height: 100%;
+}
+
+.object-fit-cover {
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .col-md-6 {
+    margin-bottom: 20px;
+  }
+
+  .banner {
+    max-height: 500px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .card-img-top {
+    border-radius: 10px 10px 0 0;
+  }
+}

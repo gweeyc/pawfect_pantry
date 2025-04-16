@@ -1,0 +1,54 @@
+/* Footer Base Styling */
+footer {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  font-size: 0.95rem;
+}
+
+/* Footer Section Headings */
+footer h6 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Footer Links */
+footer a.text-reset {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+footer a.text-reset:hover {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+/* Contact Info Icons */
+footer .fas {
+  margin-right: 8px;
+  color: #007bff;
+}
+
+/* Social Media Section */
+.footer-social {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.footer-social a {
+  color: white;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: #dceeff;
+}
+
+/* Footer Bottom Bar */
+footer .footer-bottom {
+  background-color: #767a7e;
+  color: white;
+  font-size: 0.9rem;
+  padding: 15px 0;
+}

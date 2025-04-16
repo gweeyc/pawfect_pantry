@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}User Details{% endblock %}
+{% block content %}
+<style>
+    .form-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container h2 {
+        margin-bottom: 20px;
+        color: #0077cc;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+
+    button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #0077cc;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #005fa3;
+    }
+</style>
+
+<div class="form-container">
+    <h2>Edit User: {{ user.username }}</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="username" value="{{ user.username }}" required placeholder="Username">
+        <input type="email" name="email" value="{{ user.email }}" required placeholder="Email">
+        <input type="text" name="first_name" value="{{ user.first_name }}" placeholder="First Name">
+        <input type="text" name="last_name" value="{{ user.last_name }}" placeholder="Last Name">
+        <button type="submit">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block title %}Order #{{ order.id }}{% endblock %}
+
+{% block content %}
+<style>
+    .admin-order-detail {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .admin-order-detail h2 {
+        color: #0077cc;
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+    }
+
+    .admin-order-detail p {
+        margin: 10px 0;
+    }
+
+    .admin-order-detail .section {
+        margin-top: 30px;
+        border-top: 1px solid #eee;
+        padding-top: 20px;
+    }
+
+    .order-label {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .order-total {
+        font-size: 1.2rem;
+        color: #28a745;
+    }
+
+    .status-form {
+        margin-top: 20px;
+    }
+
+    .status-form select {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 1rem;
+    }
+
+    .status-form button {
+        padding: 8px 16px;
+        margin-left: 10px;
+        background-color: #0077cc;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+    }
+
+    .status-form button:hover {
+        background-color: #005fa3;
+    }
+</style>
+
+<div class="admin-order-detail">
+    <h2>Order #{{ order.id }} ({{ order.status }})</h2>
+    <p><span class="order-label">Customer:</span> {{ order.user.get_full_name|default:order.user.username }}</p>
+    <p><span class="order-label">Email:</span> {{ order.user.email }}</p>
+    <p><span class="order-label">Phone:</span> {{ order.phone }}</p>
+    <p><span class="order-label">Address:</span> {{ order.address }}</p>
+    <p><span class="order-label">Placed on:</span> {{ order.date|date:"Y-m-d H:i" }}</p>
+
+    <div class="section">
+        <p><span class="order-label">Order Notes:</span> {{ order.note|default:"No notes" }}</p>
+        <p><span class="order-label">Total:</span> <span class="order-total">${{ order.total }}</span></p>
+
+        {% if order.status != "Delivered" and order.status != "Cancelled" %}
+        <div class="status-form">
+            <form method="POST">
+                {% csrf_token %}
+                <label for="status" class="order-label">Update Status:</label>
+                <select name="status" id="status">
+                    <option value="Processing" {% if order.status == "Processing" %}selected{% endif %}>Processing</option>
+                    <option value="Acknowledged" {% if order.status == "Acknowledged" %}selected{% endif %}>Acknowledged</option>
+                    <option value="Shipped" {% if order.status == "Shipped" %}selected{% endif %}>Shipped</option>
+                    <option value="Delivered" {% if order.status == "Delivered" %}selected{% endif %}>Delivered</option>
+                    <option value="Cancelled" {% if order.status == "Cancelled" %}selected{% endif %}>Cancelled</option>
+                </select>
+                <button type="submit">Update</button>
+            </form>
+        </div>
+        {% else %}
+        <p><em>This order is marked as <strong>{{ order.status }}</strong> and can no longer be updated.</em></p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

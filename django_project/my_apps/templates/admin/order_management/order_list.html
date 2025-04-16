@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}All Orders{% endblock %}
+{% block content %}
+<style>
+    .admin-orders {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    }
+
+    .admin-orders h2 {
+        text-align: center;
+        color: #0077cc;
+        margin-bottom: 25px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 12px;
+        border: 1px solid #ccc;
+        text-align: center;
+    }
+
+    th {
+        background-color: #0077cc;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .view-btn {
+        background-color: #6c63ff;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: 0.3s;
+        font-weight: 500;
+    }
+
+    .view-btn:hover {
+        background-color: #554eea;
+    }
+</style>
+
+<div class="admin-orders">
+    <h2>All Customer Orders</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Customer</th>
+                <th>Date</th>
+                <th>Total ($)</th>
+                <th>Status</th>
+                <th>View</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ order.user.get_full_name|default:order.user.username }}</td>
+                <td>{{ order.date|date:"Y-m-d H:i" }}</td>
+                <td>{{ order.total }}</td>
+                <td>{{ order.status }}</td>
+                <td>
+                    <a href="{% url 'admin_order_detail' order.id %}" class="view-btn">View</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No orders found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

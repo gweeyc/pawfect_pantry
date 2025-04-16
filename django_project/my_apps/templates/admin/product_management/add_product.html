@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block title %}Add Product{% endblock %}
+{% block content %}
+<style>
+    .form-section {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-section h2 {
+        text-align: center;
+        color: #0077cc;
+        margin-bottom: 25px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="file"],
+    select,
+    textarea {
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        width: 100%;
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 80px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group button {
+        background-color: #0077cc;
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .form-group button:hover {
+        background-color: #005fa3;
+    }
+</style>
+
+<div class="form-section">
+    <h2>Add Product</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.name.label_tag }} {{ form.name }}
+        </div>
+        <div class="form-group">
+            {{ form.tags.label_tag }} {{ form.tags }}
+        </div>
+        <div class="form-group">
+            {{ form.category.label_tag }} {{ form.category }}
+        </div>
+        <div class="form-group">
+            {{ form.description.label_tag }} {{ form.description }}
+        </div>
+        <div class="form-group">
+            {{ form.price.label_tag }} {{ form.price }}
+        </div>
+        <div class="form-group">
+            {{ form.stock.label_tag }} {{ form.stock }}
+        </div>
+        <div class="form-group">
+            {{ form.image.label_tag }} {{ form.image }}
+        </div>
+        <div class="form-group">
+            <button type="submit">Add Product</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

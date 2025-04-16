@@ -1,0 +1,11 @@
+username,email,first_name,last_name,phone,address,bio,is_admin
+john_doe,john@example.com,John,Doe,1234567890,"123 Ocean St, Miami, FL",Seafood lover,False
+jane_smith,jane@example.com,Jane,Smith,2345678901,"456 Bay Rd, Tampa, FL",Loves cooking fish,False
+michael_lee,michael@example.com,Michael,Lee,3456789012,"789 River Ave, Seattle, WA",Shrimp enthusiast,False
+emily_white,emily@example.com,Emily,White,4567890123,"321 Lake Dr, Chicago, IL",Avid griller,False
+daniel_james,daniel@example.com,Daniel,James,5678901234,"654 Harbor Ln, San Diego, CA",Fresh catch fan,False
+olivia_brown,olivia@example.com,Olivia,Brown,6789012345,"987 Pier Blvd, Boston, MA",Ocean bounty chef,False
+william_clark,william@example.com,William,Clark,7890123456,"159 Reef Ct, New York, NY",Barramundi lover,False
+sophia_hill,sophia@example.com,Sophia,Hill,8901234567,"753 Dock St, Houston, TX",Seafood connoisseur,False
+david_jones,david@example.com,David,Jones,9012345678,"951 Marina Pl, New Orleans, LA",Crab boil king,False
+ava_miller,ava@example.com,Ava,Miller,1123456789,"258 Jetty Way, Portland, OR",Fish taco master,False
