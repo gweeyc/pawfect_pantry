@@ -13,8 +13,8 @@ media/
 staticfiles/
 
 # Envs and secrets
-.env
-*.env
+# .env
+# *.env
 
 # VSCode or IDE
 .vscode/
