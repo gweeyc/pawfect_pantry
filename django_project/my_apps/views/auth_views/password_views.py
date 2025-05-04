@@ -9,7 +9,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 
-from my_apps.views.auth_views import email_views
+from my_apps.views.auth_views import auth_email_views
 
 
 # 1️⃣ Request password reset link
@@ -21,7 +21,7 @@ def api_password_reset_request(request):
     if users.exists():
         for user in users:
             token = default_token_generator.make_token(user)
-            email_views.send_password_reset_email(user, token)  # Customize this
+            auth_email_views.send_password_reset_email(user, token)  # Customize this
     return Response({"message": "If your email exists, a reset link has been sent."})
 
 

@@ -14,17 +14,15 @@ const Cart = () => {
 
   const fetchCart = async () => {
     try {
-      const res = await axios.get('http://localhost:8000/api/cart/', { withCredentials: true });
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/cart/`, { withCredentials: true });
       const items = res.data.cart;
       setCartItems(items);
 
-      // Set initial quantities
       const initialQuantities = items.reduce((acc, item) => {
         acc[item.product_id] = item.quantity;
         return acc;
       }, {});
       setQuantities(initialQuantities);
-
       setTotal(res.data.total);
     } catch (err) {
       console.error('Error fetching cart:', err);
@@ -42,11 +40,11 @@ const Cart = () => {
     try {
       const payload = {
         items: Object.entries(quantities).map(([product_id, quantity]) => ({
-          product_id,
+          product_id: parseInt(product_id),
           quantity,
         }))
       };
-      await axios.post('http://localhost:8000/api/cart/update/', payload, { withCredentials: true });
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/cart/update/`, payload, { withCredentials: true });
       alert('Cart updated!');
       fetchCart();
     } catch (err) {
@@ -56,7 +54,7 @@ const Cart = () => {
 
   const handleRemove = async (productId) => {
     try {
-      await axios.post(`http://localhost:8000/api/cart/remove/${productId}/`, {}, { withCredentials: true });
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/cart/remove/${productId}/`, {}, { withCredentials: true });
       fetchCart();
     } catch (err) {
       console.error('Error removing item:', err);
@@ -64,17 +62,17 @@ const Cart = () => {
   };
 
   return (
-    <div className="cart-container">
-      <h2>Your Cart</h2>
+    <div className="cart-container container mt-4">
+      <h2 className="mb-4">🛒 Your Cart</h2>
       {cartItems.length > 0 ? (
         <>
-          <table>
-            <thead>
+          <table className="table table-bordered align-middle">
+            <thead className="table-light">
               <tr>
                 <th>#</th>
                 <th>Item</th>
                 <th>Quantity</th>
-                <th>Price ($)</th>
+                <th>Unit Price ($)</th>
                 <th>Subtotal ($)</th>
                 <th>Actions</th>
               </tr>
@@ -83,7 +81,14 @@ const Cart = () => {
               {cartItems.map((item, index) => (
                 <tr key={item.id}>
                   <td>{index + 1}</td>
-                  <td>{item.product_name}</td>
+                  <td className="d-flex align-items-center">
+                    <img
+                      src={`${process.env.REACT_APP_API_URL}${item.image}`}
+                      alt={item.product_name}
+                      className="cart-img me-2"
+                    />
+                    {item.product_name}
+                  </td>
                   <td>
                     <input
                       type="number"
@@ -92,13 +97,15 @@ const Cart = () => {
                       onChange={(e) =>
                         handleQuantityChange(item.product_id, parseInt(e.target.value))
                       }
+                      className="form-control"
+                      style={{ width: '80px' }}
                     />
                   </td>
-                  <td>{item.price.toFixed(2)}</td>
-                  <td>{(item.price * quantities[item.product_id]).toFixed(2)}</td>
+                  <td>${item.price.toFixed(2)}</td>
+                  <td>${(item.price * quantities[item.product_id]).toFixed(2)}</td>
                   <td>
                     <button
-                      className="btn btn-delete"
+                      className="btn btn-danger btn-sm"
                       onClick={() => handleRemove(item.product_id)}
                     >
                       Delete
@@ -108,13 +115,19 @@ const Cart = () => {
               ))}
             </tbody>
           </table>
-          <div className="total">Total: ${total.toFixed(2)}</div>
-          <button className="btn btn-update" onClick={handleUpdateCart}>
-            Update Cart
-          </button>
-          <Link to="/checkout" className="checkout-btn">
-            Proceed to Checkout
-          </Link>
+
+          <div className="text-end mb-3">
+            <h5><strong>Total: ${total.toFixed(2)}</strong></h5>
+          </div>
+
+          <div className="d-flex justify-content-between flex-wrap gap-2">
+            <button className="btn btn-outline-primary" onClick={handleUpdateCart}>
+              Update Cart
+            </button>
+            <Link to="/checkout" className="btn btn-success">
+              Proceed to Checkout
+            </Link>
+          </div>
         </>
       ) : (
         <p>Your cart is empty.</p>

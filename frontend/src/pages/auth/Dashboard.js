@@ -17,7 +17,7 @@ const Dashboard = () => {
 
   // Fetch current user data
   useEffect(() => {
-    axios.get('http://localhost:8000/api/user/', {
+    axios.get(`${process.env.REACT_APP_API_URL}/api/user/`, {
       withCredentials: true
     }).then(res => {
       setUsername(res.data.username);
@@ -35,7 +35,7 @@ const Dashboard = () => {
     });
 
     // Fetch profile data
-    axios.get('http://localhost:8000/api/profile/', {
+    axios.get(`${process.env.REACT_APP_API_URL}/api/profile/`, {
       withCredentials: true
     }).then(res => {
       setFormData(prev => ({
@@ -64,12 +64,12 @@ const Dashboard = () => {
         address: formData.address
       };
 
-      await axios.put('http://localhost:8000/api/profile/update/', userPayload, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/api/profile/update/`, userPayload, {
         withCredentials: true
       });
 
       if (formData.new_password) {
-        await axios.post('http://localhost:8000/api/password/change/', {
+        await axios.post(`${process.env.REACT_APP_API_URL}/api/password/change/`, {
           old_password: '', // not required in your current backend
           new_password: formData.new_password
         }, { withCredentials: true });

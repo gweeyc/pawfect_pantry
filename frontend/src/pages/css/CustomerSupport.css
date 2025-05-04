@@ -1,0 +1,43 @@
+/* src/pages/CustomerSupport.css */
+
+.customer-support {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .customer-support h2 {
+    color: #2e4739;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+  
+  .customer-support h4 {
+    color: #2a3d2f;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  
+  .customer-support ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .customer-support ul li {
+    margin-bottom: 0.6rem;
+    color: #333;
+  }
+  
+  .customer-support a {
+    color: #00695c;
+    text-decoration: underline;
+  }
+  
+  .customer-support a:hover {
+    color: #004d40;
+  }
+  

@@ -1,20 +1,11 @@
-name,description,category,price,stock,tags
-Barramundi,"Freshwater white fish, mild flavor",farmed fish,12.99,100,"barramundi,freshwater,white fish,farmed,mild,grilled,pan-fry"
-Coho Salmon,"Rich and flavorful, sashimi-grade",salmon and tuna,15.49,80,"coho,salmon,salmon and tuna,sashimi,rich,omega-3,red fish"
-Vannamei Shrimp,"Farm-raised, peeled and deveined",crustaceans,9.99,150,"shrimp,vannamei,crustaceans,farmed,peeled,deveined,seafood"
-Steelhead Trout,"Rainbow trout variant, omega-3 rich",salmon and tuna,14.29,90,"steelhead,trout,salmon and tuna,omega-3,grilled,baked,healthy"
-Yellowtail Kingfish,"Firm texture, great for grilling",farmed fish,18.99,70,"yellowtail,kingfish,grill,firm,farmed,sushi-grade"
-Giant River Prawn,"Jumbo prawns from Southeast Asia",crustaceans,16.75,120,"prawn,giant river,crustaceans,asian,jumbo,grilled,bbq"
-Hybrid Catfish,"Channel x Blue hybrid, mild flavor",farmed fish,11.25,110,"catfish,hybrid,channel,blue,farmed,white fish,fried"
-Hybrid Striped Bass,"White flaky fish, great for grilling",farmed fish,13.75,100,"striped bass,hybrid,farmed,white fish,grill,flaky"
-Pompano,"Butter-soft texture, perfect for pan-fry",wild-caught fish,14.99,90,"pompano,wild-caught,buttery,pan-fry,silver fish,delicate"
-Pollock,"Lean whitefish, used in fish sticks",wild-caught fish,10.5,130,"pollock,wild-caught,fish sticks,lean,whitefish,fried"
-Maine Lobster,"Premium cold-water lobster",crustaceans,29.99,60,"lobster,maine,crustaceans,premium,cold-water,grilled,butter"
-Mussels,"Farm-raised black mussels",mollusk,7.49,140,"mussels,shellfish,farmed,black,mollusk,steamed,garlic"
-Oyster,"Fresh shucked oysters",mollusk,8.99,125,"oysters,shucked,raw,half shell,mollusk,shellfish,seafood"
-Clams,"Little neck clams, great for chowder",mollusk,7.99,110,"clams,little neck,chowder,shellfish,mollusk,steamed,brothy"
-King Crabs,"Large meaty legs, frozen",crustaceans,34.99,40,"king crab,crustaceans,legs,frozen,premium,snow crab,meaty"
-Mud Crabs,"Live mud crabs from estuaries",crustaceans,19.99,70,"mud crab,live,estuary,crustaceans,spicy chili crab,seafood"
-Scallops,"Dry-packed sea scallops",mollusk,21.99,90,"scallops,sea scallop,dry packed,mollusk,shellfish,sautéed,grilled"
-Halibut,"Mild-flavored flatfish, firm white flesh",wild-caught fish,17.49,85,"halibut,flatfish,wild-caught,white fish,firm,grilled,baked"
-Squid,"Great for stir fry and grilling. Fresh from Patagonia",mollusk,10,85,"squid,wild-caught,mollusk"
+name,tags,species,food_type,description,price,stock,image
+Bacon Flavour Spray,"protein,healthy",All,Pet Food,"Bacon Flavour Spray - a nutritious treat for pets.",9.99,100,products_images/bacon_flavour_spray.png
+Frozen Quails,"protein,healthy",All,Pet Food,"Frozen Quails - a nutritious treat for pets.",9.99,100,products_images/frozen_quails.png
+Blood Sausage,"protein,healthy",All,Pet Food,"Blood Sausage - a nutritious treat for pets.",9.99,100,products_images/blood_sausage.png
+Camel Hide Chews,"protein,healthy",All,Pet Food,"Camel Hide Chews - a nutritious treat for pets.",9.99,100,products_images/camel_hide_chews.png
+Carp Trout Formula,"protein,healthy",All,Pet Food,"Carp Trout Formula - a nutritious treat for pets.",9.99,100,products_images/carp_trout_formula.png
+Catfish,"protein,healthy",All,Pet Food,"Catfish - a nutritious treat for pets.",9.99,100,products_images/catfish.png
+Catnip Biscuit,"protein,healthy",Cats,Treats,"Catnip Biscuit - a nutritious treat for pets.",9.99,100,products_images/catnip_biscuit.png
+Caviar,"protein,healthy",All,Pet Food,"Caviar - a nutritious treat for pets.",9.99,100,products_images/caviar.png
+Cheese Flavour Spray,"protein,healthy",All,Pet Food,"Cheese Flavour Spray - a nutritious treat for pets.",9.99,100,products_images/cheese_flavour_spray.png
+Cheese Sticks,"protein,healthy",All,Pet Food,"Cheese Sticks - a nutritious treat for pets.",9.99,100,products_images/cheese_sticks.png

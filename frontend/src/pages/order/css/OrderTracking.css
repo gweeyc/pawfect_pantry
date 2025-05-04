@@ -1,0 +1,41 @@
+.geo-tracking-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .geo-tracking-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .location-info p,
+  .tracking-details p {
+    margin: 6px 0;
+    font-size: 1rem;
+    color: #444;
+  }
+  
+  .text-danger {
+    color: red;
+    text-align: center;
+  }
+  
+  .map-container iframe {
+    border-radius: 10px;
+    margin-top: 12px;
+  }
+
+  .geo-tracking-container h2 {
+    color: #0077cc;
+  }
+
+  .fat_corgi {
+    height: 50px;
+    margin-right: 20px;
+  }

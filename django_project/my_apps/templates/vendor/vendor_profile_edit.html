@@ -1,0 +1,125 @@
+{% extends 'admin_base.html' %}
+{% block title %}Update Profile{% endblock %}
+
+{% block content %}
+<style>
+  .profile-form-container {
+    max-width: 960px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  }
+
+  .profile-form-container h2 {
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .section-title {
+    color: #333;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  label {
+    font-weight: 500;
+  }
+
+  input, select, textarea {
+    border-radius: 6px;
+  }
+
+  .alert {
+    text-align: center;
+  }
+
+  @media (max-width: 576px) {
+    .profile-form-container {
+      padding: 20px;
+    }
+  }
+
+  .form-group label {
+    margin-bottom: 6px;
+    display: block;
+    font-weight: 600;
+  }
+  
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+</style>
+
+<div class="container profile-form-container">
+  <h2>Update Your Profile</h2>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+  
+    <!-- Account Info -->
+    <h4 class="section-title">👤 Account Info</h4>
+    <div class="row">
+      {% for field in account_form %}
+        <div class="col-md-6 form-group">
+          <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}
+            <div class="text-danger">{{ field.errors }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  
+    <!-- Contact Info -->
+    <h4 class="section-title">📱 Contact Info</h4>
+    <div class="row">
+      {% for field in profile_form %}
+        <div class="col-md-6 form-group">
+          <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}
+            <div class="text-danger">{{ field.errors }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  
+    <!-- Business Info -->
+    <h4 class="section-title">🏢 Business Info</h4>
+    <div class="row">
+      {% for field in vendor_form %}
+        <div class="col-md-6 form-group">
+          <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}
+            <div class="text-danger">{{ field.errors }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  
+    <button type="submit" class="btn btn-primary mt-3 w-100">Update Profile</button>
+  </form>
+</div>
+{% endblock %}

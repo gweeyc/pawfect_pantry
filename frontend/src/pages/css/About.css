@@ -1,5 +1,5 @@
 .about-container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 50px auto;
     padding: 30px;
     background: #fff;
@@ -16,3 +16,14 @@
     text-align: center;
   }
   
+  .about-text p {
+    font-size: 1.2rem;       /* Increase from default 1rem */
+    line-height: 1.6;        /* Improves readability */
+    color: #333;             /* Darker, easier to read */
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .rabbit {
+    height: 60px;
+    margin-right: 20px;
+  }

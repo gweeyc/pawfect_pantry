@@ -1,0 +1,54 @@
+/* src/pages/Sitemap.css */
+
+.sitemap {
+    background-color: #fdfdfd;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .sitemap h2 {
+    color: #2b463b;
+    font-weight: bold;
+    margin-bottom: 2rem;
+  }
+  
+  .sitemap h4 {
+    color: #1e362c;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  
+  .sitemap ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .sitemap ul li {
+    margin-bottom: 0.6rem;
+  }
+  
+  .sitemap a {
+    text-decoration: none;
+    color: #00695c;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .sitemap a:hover {
+    text-decoration: underline;
+    color: #004d40;
+  }
+  
+  @media (max-width: 768px) {
+    .sitemap {
+      padding: 1.5rem;
+    }
+    .sitemap h2 {
+      font-size: 1.6rem;
+    }
+    .sitemap h4 {
+      font-size: 1.1rem;
+    }
+  }

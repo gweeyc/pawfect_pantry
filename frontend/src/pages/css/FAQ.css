@@ -1,0 +1,48 @@
+/* src/components/FAQ.css */
+
+.faq-section {
+    padding: 2rem;
+    background-color: #fefefe;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ui-accordion .ui-accordion-header {
+    background-color: #e6f2e6;
+    color: #2d4739;
+    padding: 1rem;
+    font-weight: 600;
+    border: 1px solid #cce0cc;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+  }
+  
+  .ui-accordion .ui-accordion-header-active {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .ui-accordion .ui-accordion-content {
+    padding: 1rem 1.5rem;
+    background-color: #ffffff;
+    border: 1px solid #e2e2e2;
+    border-top: none;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    color: #333;
+  }
+  
+  @media (max-width: 768px) {
+    .faq-section {
+      padding: 1rem;
+    }
+    .ui-accordion .ui-accordion-header,
+    .ui-accordion .ui-accordion-content {
+      font-size: 0.9rem;
+    }
+  }
+
+  .parakeet {
+    height: 60px;
+    margin-left: 20px;
+  }

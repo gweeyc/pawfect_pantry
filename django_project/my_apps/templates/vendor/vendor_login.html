@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vendor Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f7f9fc;
+    }
+
+    .form-container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 30px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .form-container h2 {
+      margin-bottom: 20px;
+      color: #007bff;
+    }
+
+    .form-container input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    .form-container button {
+      padding: 10px 20px;
+      width: 100%;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .form-container button:hover {
+      background-color: #0056b3;
+    }
+
+    .form-links {
+      margin-top: 20px;
+    }
+
+    .form-links a {
+      display: block;
+      margin-bottom: 10px;
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .form-links a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      .form-container {
+        margin: 20px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Vendor Login</h2>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %}" role="alert">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <form method="POST">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="Vendor Username" required><br>
+    <input type="password" name="password" placeholder="Password" required><br>
+    <button type="submit">Login</button>
+  </form>
+
+  <div class="form-links">
+    <a href="{% url 'vendor_register' %}">Don't have an account? Register</a>
+    <a href="{% url 'vendor_reset_password' %}">Forgot password? Reset here</a>
+  </div>
+</div>
+
+</body>
+</html>

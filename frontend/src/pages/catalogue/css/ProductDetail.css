@@ -1,108 +1,166 @@
+/* Wrapper Card */
 .product-detail {
-    max-width: 700px;
-    margin: 40px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Header Styling */
+.product-detail h2 {
+  margin-bottom: 10px;
+  color: #0077cc;
+  font-weight: 700;
+}
+
+.product-detail p {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Product Image */
+.product-img {
+  width: 100%;
+  height: auto;
+  max-height: 400px; /* Optional: set a max-height so very tall images don't break layout */
+  object-fit: contain; /* <-- this shows the full image without cropping */
+  border-radius: 10px;
+  border: 1px solid #eee;
+  background-color: #f8f8f8; /* In case image has transparent parts */
+  padding: 5px; /* Optional: gives a nice border space */
+}
+
+/* Price Style */
+.price {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+/* Add to Cart Button */
+.checkout-btn,
+.feedback-form button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.checkout-btn {
+  background-color: #28a745;
+  color: white;
+  width: 100%;
+}
+
+.checkout-btn:hover {
+  background-color: #218838;
+}
+
+/* Feedback Form */
+.feedback-form {
+  margin-top: 10px;
+}
+
+.feedback-form h4 {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.feedback-form textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.feedback-form textarea:focus {
+  outline: none;
+  border-color: #0077cc;
+  box-shadow: 0 0 0 0.15rem rgba(0, 119, 204, 0.2);
+}
+
+.feedback-form button {
+  background-color: #0077cc;
+  color: white;
+  margin-top: 10px;
+}
+
+.feedback-form button:hover {
+  background-color: #005fa3;
+}
+
+/* Feedback Section */
+.feedback-section {
+  margin-top: 40px;
+}
+
+.feedback-section h4 {
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: 600;
+}
+
+.feedback-card {
+  padding: 1rem 1.2rem;
+  background-color: #f9f9f9;
+  border-left: 4px solid #0077cc;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.feedback-author {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.feedback-tag {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 4px 10px;
+  background-color: #198754;
+  color: white;
+  border-radius: 12px;
+  font-size: 0.75rem;
+}
+
+/* Badge Colors (Optional Feedback Types) */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: white;
+  margin-top: 5px;
+}
+
+.bg-success { background-color: #28a745; }
+.bg-danger { background-color: #dc3545; }
+.bg-secondary { background-color: #6c757d; }
+
+/* Responsive Layout Helpers */
+@media (max-width: 768px) {
+  .product-detail {
+    padding: 20px;
   }
-  
-  .product-detail h2 {
-    margin-bottom: 15px;
-    color: #0077cc;
-  }
-  
-  .product-detail p {
-    margin-bottom: 10px;
-  }
-  
-  .product-img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .price {
-    font-size: 1.4rem;
-    font-weight: bold;
-    margin: 20px 0;
-  }
-  
-  .checkout-btn {
-    padding: 12px 25px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    width: 100%;
-    font-weight: 600;
-    transition: background-color 0.2s ease;
-  }
-  
-  .checkout-btn:hover {
-    background-color: #218838;
-  }
-  
-  .feedback-section {
-    margin-top: 40px;
-  }
-  
-  .feedback-section h3 {
-    margin-bottom: 15px;
-    color: #333;
-  }
-  
-  .feedback-item {
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #f7f7f7;
-    border-left: 4px solid #0077cc;
-    border-radius: 8px;
-  }
-  
-  .badge {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    color: white;
-    margin-top: 5px;
-  }
-  
-  .bg-success { background-color: #28a745; }
-  .bg-danger { background-color: #dc3545; }
-  .bg-secondary { background-color: #6c757d; }
-  
-  .feedback-form textarea {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    resize: vertical;
-    font-size: 1rem;
-    transition: border-color 0.3s;
-  }
-  
-  .feedback-form textarea:focus {
-    outline: none;
-    border-color: #0077cc;
-    box-shadow: 0 0 0 0.15rem rgba(0, 119, 204, 0.2);
-  }
-  
+
+  .checkout-btn,
   .feedback-form button {
-    width: 100%;
-    background-color: #0077cc;
-    border: none;
-    color: white;
-    font-weight: 600;
-    padding: 10px 20px;
-    border-radius: 8px;
-    margin-top: 10px;
-    transition: background-color 0.2s ease;
+    font-size: 1rem;
   }
-  
-  .feedback-form button:hover {
-    background-color: #005fa3;
-  }
-  
+}
+
+.product-detail input[type="number"] {
+  width: 100%;
+  padding: 6px 10px;
+}
+
+.product-detail .btn-lg {
+  height: 100%;
+}

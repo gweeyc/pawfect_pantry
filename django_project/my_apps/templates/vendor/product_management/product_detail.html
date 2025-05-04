@@ -1,0 +1,70 @@
+{% extends 'admin_base.html' %}
+{% block title %}Product Detail{% endblock %}
+
+{% block content %}
+<style>
+  .product-container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+  }
+
+  .product-title {
+    text-align: center;
+    color: #cc0000;
+    margin-bottom: 30px;
+  }
+
+  .product-info p {
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+  }
+
+  .product-image img {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  .btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+  }
+</style>
+
+<div class="product-container">
+  <h2 class="product-title">{{ product.name }}</h2>
+  <div class="row">
+    <!-- Left Column: Product Image -->
+    <div class="col-md-6 product-image">
+      {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+      {% else %}
+        <p>No image uploaded.</p>
+      {% endif %}
+    </div>
+
+    <!-- Right Column: Product Details -->
+    <div class="col-md-6 product-info">
+      <p><strong>Price:</strong> ${{ product.price }}</p>
+      <p><strong>Stock:</strong> {{ product.stock }}</p>
+      <p><strong>Description:</strong> {{ product.description }}</p>
+      <p><strong>Tags:</strong> {{ product.tags }}</p>
+      <p><strong>Food Type:</strong> {{ product.food_type }}</p>
+      <p><strong>Species:</strong> {{ product.species }}</p>
+      <p><strong>Views:</strong> {{ product.views }}</p>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="btn-group">
+    <a href="{% url 'vendor_product_list' %}" class="btn btn-secondary">Back</a>
+    <a href="{% url 'vendor_product_edit' product.id %}" class="btn btn-primary">Update Product</a>
+  </div>
+</div>
+{% endblock %}

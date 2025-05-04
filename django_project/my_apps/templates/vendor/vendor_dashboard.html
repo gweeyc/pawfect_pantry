@@ -1,0 +1,117 @@
+{% extends 'admin_base.html' %}
+{% block title %}Vendor Dashboard{% endblock %}
+
+{% block content %}
+<style>
+  .vendor-welcome-box {
+    max-width: 800px;
+    margin: 60px auto 20px;
+    padding: 30px;
+    background: #fdfdfd;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+  }
+
+  .dashboard-section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  }
+
+  .dashboard-section h3 {
+    color: #cc0000;
+    margin-bottom: 15px;
+  }
+
+  .dashboard-section table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .dashboard-section th, .dashboard-section td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+
+  .dashboard-section th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+  }
+</style>
+
+<div class="vendor-welcome-box">
+  <h1>Welcome to Your Vendor Dashboard</h1>
+  <p>Hello, {{ profile.user.username }}. You can manage your products and view orders here.</p>
+</div>
+
+<div class="dashboard-section">
+  <h3>Your Products</h3>
+  {% if products %}
+    <table>
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Stock</th>
+          <th>Price</th>
+          <th>Views</th>
+          <th>Last Updated</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in products %}
+        <tr>
+          <td>{{ product.name }}</td>
+          <td>{{ product.stock }}</td>
+          <td>${{ product.price }}</td>
+          <td>{{ product.views }}</td>
+          <td>{{ product.updated_at|date:"Y-m-d H:i" }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No products listed yet.</p>
+  {% endif %}
+</div>
+
+<div class="dashboard-section">
+  <h3>Recent Orders for Your Products</h3>
+  {% if orders %}
+    <table>
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Buyer</th>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+          {% for item in order.items.all %}
+            {% if item.product.vendor.user.id == profile.user.id %}
+            <tr>
+              <td>{{ order.id }}</td>
+              <td>{{ order.user.username }}</td>
+              <td>{{ item.product.name }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>${{ item.subtotal }}</td>
+              <td>{{ order.date|date:"Y-m-d H:i" }}</td>
+            </tr>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No recent orders for your products.</p>
+  {% endif %}
+</div>
+{% endblock %}

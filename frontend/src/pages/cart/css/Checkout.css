@@ -1,47 +1,169 @@
-.checkout-container {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 30px;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+.checkout-container.container {
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.checkout-container h2 {
+  text-align: center;
+  color: #0077cc;
+  margin-bottom: 30px;
+}
+
+/* Label & Input Styling */
+.checkout-container label {
+  font-weight: bold;
+  margin-top: 15px;
+  display: block;
+}
+
+.checkout-container input,
+.checkout-container textarea,
+.checkout-container select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+/* Button Styling */
+.checkout-container button {
+  width: 100%;
+  padding: 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.checkout-container button:hover {
+  background-color: #218838;
+}
+
+.checkout-container button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Two-Column Layout */
+.order-summary {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.order-summary h3 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* Add this if not already defined */
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+/* Header Styling */
+.summary-table th {
+  background-color: #0077cc;
+  color: #fff;
+  padding: 12px;
+  text-align: left;
+}
+
+/* Row Styling */
+.summary-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Zebra striping (optional) */
+.summary-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.order-summary {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Total Row */
+.summary-table tfoot td {
+  font-weight: bold;
+  background-color: #f1f1f1;
+  color: #333;
+  padding: 12px;
+}
+
+/* Payment Dropdown */
+.payment-selection {
+  margin: 25px 0 15px;
+}
+
+.payment-selection label {
+  margin-bottom: 5px;
+  display: block;
+}
+
+.payment-options {
+  margin-top: 10px;
+}
+
+/* Payment Logos */
+.payment-methods {
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 30px;
+}
+
+.payment-methods p {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.payment-methods .logos img {
+  width: 60px;
+  margin: 0 8px;
+  vertical-align: middle;
+  transition: transform 0.3s ease;
+}
+
+.payment-methods .logos img:hover {
+  transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .checkout-container.container {
+    padding: 20px;
   }
-  
-  .checkout-container h2 {
-    text-align: center;
-    color: #0077cc;
-    margin-bottom: 20px;
+
+  .order-summary {
+    margin-bottom: 25px;
   }
-  
-  .checkout-container label {
-    font-weight: bold;
-    margin-top: 15px;
+
+  .summary-table th,
+  .summary-table td {
+    font-size: 14px;
+  }
+
+  .payment-options label {
     display: block;
+    margin-bottom: 10px;
   }
-  
-  .checkout-container input,
-  .checkout-container textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-  }
-  
-  .checkout-container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .checkout-container button:hover {
-    background-color: #218838;
-  }
-  
+}

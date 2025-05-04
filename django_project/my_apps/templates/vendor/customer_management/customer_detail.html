@@ -1,0 +1,69 @@
+{% extends 'admin_base.html' %}
+{% block title %}Customer Detail{% endblock %}
+
+{% block content %}
+<style>
+  .customer-box {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .customer-box h2 {
+    text-align: center;
+    color: #cc0000;
+    margin-bottom: 20px;
+  }
+
+  table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+  th {
+    background: #f9f9f9;
+  }
+
+  .btn {
+    display: block;
+    margin-top: 20px;
+  }
+</style>
+
+<div class="customer-box">
+  <h2>Purchase History - {{ customer.username }}</h2>
+  <p><strong>Email:</strong> {{ customer.email }}</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Order ID</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in order_items %}
+      <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.order.id }}</td>
+        <td>{{ item.order.date|date:"Y-m-d H:i" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <a href="{% url 'vendor_customer_list' %}" class="btn btn-secondary">Back to Customers</a>
+</div>
+{% endblock %}

@@ -38,7 +38,8 @@ def product_detail(request, product_id):
         "price": product.price,
         "stock": product.stock,
         "tags": str(product.tags),
-        "category": str(product.category), 
+        "species": product.species if product.species else None,
+        "food_type": product.food_type if product.food_type else None,
         "image": request.build_absolute_uri(str(product.image.url)) if product.image else None,
         "views": product.views,
         "feedback": feedback_data

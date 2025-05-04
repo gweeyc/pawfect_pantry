@@ -1,0 +1,125 @@
+{% extends 'admin_base.html' %}
+{% block title %}Vendor Sales Dashboard{% endblock %}
+
+{% block content %}
+<style>
+  .dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+  }
+
+  .dashboard-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .dashboard-header h2 {
+    color: #007bff;
+  }
+
+  .chart-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+  }
+
+  .chart-box h4 {
+    color: #333;
+    margin-bottom: 15px;
+  }
+
+  canvas {
+    width: 100% !important;
+    height: 250px !important;
+  }
+
+  @media (max-width: 768px) {
+    .dashboard-container {
+      padding: 20px;
+    }
+  }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h2>Vendor Sales & Performance Overview</h2>
+    <p>Track your store's orders, revenue, and product feedback</p>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="chart-box">
+        <h4>📈 Orders Per Day</h4>
+        <canvas id="ordersChart"></canvas>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="chart-box">
+        <h4>🏆 Top-Selling Products</h4>
+        <canvas id="topProductsChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="chart-box">
+        <h4 style="font-size:20px">💬 Product Feedback Sentiment</h4>
+        <canvas id="feedbackChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const ordersCtx = document.getElementById('ordersChart').getContext('2d');
+  new Chart(ordersCtx, {
+    type: 'line',
+    data: {
+      labels: [{% for entry in daily_sales %}'{{ entry.day }}',{% endfor %}],
+      datasets: [{
+        label: 'Orders',
+        data: [{% for entry in daily_sales %}{{ entry.total }},{% endfor %}],
+        borderColor: '#007bff',
+        backgroundColor: 'rgba(0,123,255,0.1)',
+        fill: true
+      }]
+    }
+  });
+
+  const topProductsCtx = document.getElementById('topProductsChart').getContext('2d');
+  new Chart(topProductsCtx, {
+    type: 'bar',
+    data: {
+      labels: [{% for product in top_products %}'{{ product.product__name }}',{% endfor %}],
+      datasets: [{
+        label: 'Units Sold',
+        data: [{% for product in top_products %}{{ product.quantity }},{% endfor %}],
+        backgroundColor: '#28a745'
+      }]
+    }
+  });
+
+  const feedbackCtx = document.getElementById('feedbackChart').getContext('2d');
+  new Chart(feedbackCtx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Positive', 'Neutral', 'Negative'],
+      datasets: [{
+        label: 'Feedback',
+        data: [
+          {{ feedback_counts.positive|default:0 }},
+          {{ feedback_counts.neutral|default:0 }},
+          {{ feedback_counts.negative|default:0 }}
+        ],
+        backgroundColor: ['#28a745', '#ffc107', '#dc3545']
+      }]
+    }
+  });
+</script>
+{% endblock %}

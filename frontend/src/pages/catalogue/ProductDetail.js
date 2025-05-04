@@ -11,12 +11,12 @@ const ProductDetail = () => {
   const [comment, setComment] = useState('');
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
+  const [quantity, setQuantity] = useState(1);
 
-  // Fetch product and feedback
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await axios.get(`http://localhost:8000/api/catalogue/${id}/`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/catalogue/${id}/`);
         setProduct(res.data);
         setFeedbackList(res.data.feedback || []);
       } catch (err) {
@@ -30,15 +30,16 @@ const ProductDetail = () => {
   const handleSubmitFeedback = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`http://localhost:8000/api/catalogue/${id}/feedback/submit/`, { comment }, {
-        withCredentials: true
-      });
+      await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/catalogue/${id}/feedback/submit/`,
+        { comment },
+        { withCredentials: true }
+      );
       setComment('');
       setSuccess(true);
       setError('');
 
-      // Refresh feedback
-      const updated = await axios.get(`http://localhost:8000/api/catalogue/${id}/`);
+      const updated = await axios.get(`${process.env.REACT_APP_API_URL}/api/catalogue/${id}/`);
       setFeedbackList(updated.data.feedback || []);
 
       setTimeout(() => setSuccess(false), 3000);
@@ -50,61 +51,102 @@ const ProductDetail = () => {
 
   const handleAddToCart = async (productId) => {
     try {
-      const response = await axios.post(`http://localhost:8000/api/catalogue/${id}/feedback/submit/`, { comment }, {
-        withCredentials: true
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/cart/add/${productId}/`,
+        { quantity },
+        { withCredentials: true }
+      );
       alert(response.data.message || 'Item added to cart!');
     } catch (error) {
       console.error('Error adding to cart:', error);
-      alert('Failed to add item. Please ensure you are logged in.');
+      alert('Failed to add item. Please log in first.');
     }
   };
 
   if (!product) return <div>Loading...</div>;
 
   return (
-    <div className="product-detail">
-      <img
-        src={product.image || '/static/images/placeholder.jpg'}
-        alt={product.name}
-        className="product-img"
-      />
-
-      <h2>{product.name}</h2>
-      <p><strong>Category:</strong> {product.category}</p>
-      <p>{product.description}</p>
-      <p><strong>Price:</strong> ${product.price}</p>
-      <p>
-        <strong>Stock:</strong>{' '}
-        {product.stock > 0 ? product.stock : (
-          <span style={{ color: 'red' }}>Out of Stock</span>
-        )}
-      </p>
-
-      <button
-        className="checkout-btn"
-        onClick={() => handleAddToCart(product.id)}
-        disabled={product.stock <= 0}
-      >
-        {product.stock > 0 ? 'Add to Cart' : 'Out of Stock'}
-      </button>
-
-      <FeedbackSection feedbackList={feedbackList} />
-
-      <div className="feedback-form">
-        <h3>Leave Feedback</h3>
-        <form onSubmit={handleSubmitFeedback}>
-          <textarea
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            rows="4"
-            placeholder="Write your comment"
-            required
+    <div className="container-xl product-detail mt-4">
+      {/* Product Info */}
+      <div className="row">
+        <div className="col-md-6 text-center">
+          <img
+            src={product.image || '/static/images/placeholder.jpg'}
+            alt={product.name}
+            className="img-fluid product-img"
           />
-          {success && <p className="text-success">Thank you for your feedback!</p>}
-          {error && <p className="text-danger">{error}</p>}
-          <button type="submit">Submit Feedback</button>
-        </form>
+        </div>
+
+        <div className="col-md-6">
+          <h2>{product.name}</h2>
+          <p>
+            <strong>Species:</strong> {product.species || 'N/A'} <br />
+            <strong>Food Type:</strong> {product.food_type || 'N/A'}
+          </p>
+          <p>{product.description}</p>
+          <p><strong>Price:</strong> ${product.price}</p>
+          <p>
+            <strong>Stock:</strong>{' '}
+            {product.stock > 0 ? product.stock : (
+              <span style={{ color: 'red' }}>Out of Stock</span>
+            )}
+          </p>
+
+          {/* Quantity + Add to Cart */}
+          {product.stock > 0 && (
+            <div className="d-flex align-items-end gap-2 mb-3">
+              <div style={{ flex: '0 0 100px' }}>
+                <label htmlFor="quantity"><strong>Qty:</strong></label>
+                <input
+                  type="number"
+                  id="quantity"
+                  className="form-control"
+                  value={quantity}
+                  min="1"
+                  max={product.stock}
+                  onChange={(e) =>
+                    setQuantity(Math.min(product.stock, Math.max(1, parseInt(e.target.value) || 1)))
+                  }
+                />
+              </div>
+              <button
+                className="btn btn-success btn-lg flex-grow-1"
+                onClick={() => handleAddToCart(product.id)}
+              >
+                Add to Cart
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Feedback Form */}
+      <div className="row mt-4">
+        <div className="col-md-12">
+          <div className="feedback-form">
+            <h4>Leave Feedback</h4>
+            <form onSubmit={handleSubmitFeedback}>
+              <textarea
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                rows="4"
+                className="form-control mb-2"
+                placeholder="Write your comment"
+                required
+              />
+              {success && <p className="text-success">Thank you for your feedback!</p>}
+              {error && <p className="text-danger">{error}</p>}
+              <button type="submit" className="btn btn-primary w-100">Submit Feedback</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      {/* Customer Feedback */}
+      <div className="row mt-5">
+        <div className="col-md-12">
+          <FeedbackSection feedbackList={feedbackList} />
+        </div>
       </div>
     </div>
   );

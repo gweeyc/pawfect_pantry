@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #333;
+      padding: 20px;
+      margin: 0;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+    .column {
+      flex: 1 1 50%;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+    h2 {
+      color: #28a745;
+    }
+    p {
+      margin-top: 15px;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+    a.button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-top: 20px;
+      background-color: #28a745;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .footer {
+      margin-top: 30px;
+      font-size: 0.9em;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Left column: Image -->
+    <div class="column">
+      <img src="{{ image_url }}" alt="Welcome Image">
+    </div>
+
+    <!-- Right column: Email content -->
+    <div class="column">
+      <h2>Welcome to Our Store! 🎉</h2>
+
+      <p>Hi {{ user.get_full_name|default:user.username }},</p>
+
+      <p>Thank you for registering an account with us! Your journey starts now. 🚀</p>
+
+      <p>To get started, you can browse our latest products and exclusive deals:</p>
+
+      <p>
+        <a href="{{ homepage_link }}" class="button">Start Shopping</a>
+      </p>
+
+      <p>We're excited to have you as part of our community. Let’s make great things happen!</p>
+
+      <div class="footer">
+        <p>Best regards,<br>Your Store Team</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+

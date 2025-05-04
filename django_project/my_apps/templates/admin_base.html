@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Dashboard{% endblock %} | PawFect Pantry</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      padding-top: 60px;
+      background-color: #f9f9f9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.25rem;
+      letter-spacing: 0.5px;
+    }
+
+    .navbar-dark .navbar-nav .nav-link {
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    .navbar-dark .navbar-nav .nav-link:hover {
+      background-color: #004d99;
+      border-radius: 5px;
+    }
+
+    .container {
+      padding-top: 20px;
+      padding-bottom: 40px;
+    }
+
+    .btn-outline-light.btn-sm {
+      font-weight: 500;
+      padding: 6px 12px;
+    }
+
+    .alert {
+      max-width: 700px;
+      margin: 20px auto;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .alert-success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .alert-danger {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    @media (max-width: 768px) {
+      .navbar-brand {
+        font-size: 1rem;
+      }
+
+      .btn-outline-light.btn-sm {
+        padding: 4px 10px;
+      }
+
+      .container {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark {% if role == 'admin' %}bg-dark{% else %}bg-primary{% endif %} fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url role|default:'admin'|add:'_dashboard' %}">
+      {% if role == 'admin' %}Admin Panel{% else %}Vendor Panel{% endif %}
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if role == 'admin' %}
+          <li class="nav-item"><div style="width:1px; height:40px; background-color:#ccc; margin:0 12px;"></div></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'order_list' %}">Orders</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'admin_product_list' %}">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'user_list' %}">Customers</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'vendor_list' %}">Vendors</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'admin_sales_dashboard' %}">Sales</a></li>
+          <li class="nav-item"><div style="width:1px; height:40px; background-color:#ccc; margin:0 12px;"></div></li>
+          <li class="nav-item"><a class="nav-link" href="http://localhost:3000" target="_blank">Homepage</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">Django Admin</a></li>
+          <li class="nav-item"><div style="width:1px; height:40px; background-color:#ccc; margin:0 12px;"></div></li>
+          {% elif role == 'vendor' %}
+          <li class="nav-item"><div style="width:1px; height:40px; background-color:#ccc; margin:0 12px;"></div></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'vendor_profile_edit' %}">My Vendor Profile</a></li>
+          <li class="nav-item"><div style="width:1px; height:40px; background-color:#ccc; margin:0 12px;"></div></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'vendor_order_list' %}">Orders</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'vendor_product_list' %}">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'vendor_delivery_list' %}">Deliveries</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'vendor_customer_list' %}">Customers</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'vendor_sales_dashboard' %}">Sales</a></li>
+          <li class="nav-item"><div style="width:1px; height:40px; background-color:#ccc; margin:0 12px;"></div></li>
+          <li class="nav-item"><a class="nav-link" href="http://localhost:3000" target="_blank">Homepage</a></li>
+          <li class="nav-item"><div style="width:1px; height:40px; background-color:#ccc; margin:0 12px;"></div></li>
+        {% endif %}
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <form method="POST" action="{% url role|default:'admin'|add:'_logout' %}?next={% url role|default:'admin'|add:'_login' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
+          </form>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Flash Messages -->
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags|default:'info' }}">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+
+<!-- Page Content -->
+<div class="container mt-4">
+  {% block content %}
+  {% endblock %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

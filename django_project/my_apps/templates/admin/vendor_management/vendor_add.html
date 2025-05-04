@@ -1,0 +1,126 @@
+{% extends 'admin_base.html' %}
+{% block title %}Add Vendor{% endblock %}
+
+{% block content %}
+<style>
+  .vendor-form-container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .vendor-form-container h2 {
+    text-align: center;
+    color: #007bff;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    font-weight: 600;
+  }
+
+  .vendor-form-container label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #333;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .vendor-form-container input,
+  .vendor-form-container textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease;
+  }
+
+  .vendor-form-container input:focus,
+  .vendor-form-container textarea:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  .vendor-form-container textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .form-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+  }
+
+  .form-buttons .btn {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    color: #fff;
+  }
+
+  .btn-success:hover {
+    background-color: #218838;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+  }
+
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+
+  @media (max-width: 768px) {
+    .vendor-form-container {
+      padding: 25px 20px;
+    }
+  }
+</style>
+
+<div class="vendor-form-container">
+  <h2>Add New Vendor</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-6">
+        <label for="{{ form.business_name.id_for_label }}">Business Name:</label>
+        {{ form.business_name }}
+
+        <label for="{{ form.description.id_for_label }}">Description:</label>
+        {{ form.description }}
+      </div>
+
+      <div class="col-md-6">
+        <label for="{{ form.username.id_for_label }}">Username:</label>
+        {{ form.username }}
+
+        <label for="{{ form.email.id_for_label }}">Email:</label>
+        {{ form.email }}
+
+        <label for="{{ form.password.id_for_label }}">Password:</label>
+        {{ form.password }}
+      </div>
+    </div>
+
+    <div class="form-buttons">
+      <button type="submit" class="btn btn-success">Add Vendor</button>
+      <a href="{% url 'vendor_list' %}" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

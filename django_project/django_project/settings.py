@@ -1,31 +1,28 @@
 from pathlib import Path
-from corsheaders.defaults import default_headers
 from datetime import timedelta
+import os
+from decouple import config, Csv
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+SITE_ID = 1
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+OPENAI_API_KEY = config("OPENAI_API_KEY")
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
+SECRET_KEY = config('SECRET_KEY')
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-5z&u9!**wnfts67+63_&id(f7%c^kd1#^6&&it5d&verar7!v8'
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
-ALLOWED_HOSTS = []
+EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  # Gmail's SMTP server (works for Google Workspace too)
-EMAIL_PORT = 587  # Port 587 for TLS
-EMAIL_USE_TLS = True  # Ensures a secure connection via TLS
-EMAIL_HOST_USER = 'siewmj@gmail.com'  
-EMAIL_HOST_PASSWORD = 'stan utho xedj wciq'  # 2FA-enabled Gmail or Google Workspace
-DEFAULT_FROM_EMAIL = 'siewmj@gmail.com'
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,7 +36,7 @@ INSTALLED_APPS = [
     'dj_rest_auth',
     'dj_rest_auth.registration',
     'rest_framework.authtoken',
-    'django.contrib.sites',   # only needed for allauth
+    'django.contrib.sites',   
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -63,7 +60,7 @@ ROOT_URLCONF = 'django_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Make sure this points to your folder
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -71,6 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'my_apps.context_processors.user_role',  # ✅ Add this
             ],
         },
     },
@@ -85,11 +83,11 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'capstone_db',
-        'USER': 'capstone_user',
-        'PASSWORD': 'securepassword123',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': os.getenv('DB_NAME', 'capstone_db'),
+        'USER': os.getenv('DB_USER', 'capstone_user'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'securepassword123'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),  # 👈 default to localhost in dev
+        'PORT': os.getenv('DB_PORT', '3306'),
     }
 }
 
@@ -135,12 +133,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "http://localhost:3001",  # If using another port
     "http://127.0.0.1:3000",
+    "http://react-frontend:3000",  # Docker container name (React)
 ]
 
 CORS_ALLOW_CREDENTIALS = True
 
-# Optional (but can help debug)
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
 ]
@@ -148,8 +147,8 @@ CORS_ORIGIN_WHITELIST = [
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "http://localhost:8000",      # 🔁 sometimes needed
-    "http://127.0.0.1:8000",      # 🔁 sometimes needed
+    "http://localhost:8000",      
+    "http://127.0.0.1:8000",      
 ]
 
 CSRF_COOKIE_HTTPONLY = False

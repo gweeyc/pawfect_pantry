@@ -13,7 +13,7 @@ const BaseLayout = ({ user, setUser }) => {
           <Link to="/">
             <img src="/media/images/logo.png" alt="Logo" className="site-logo" />
           </Link>
-          <span className="brand-name">Sustainably Caught and Farmed</span>
+          <span className="brand-name">Where every bite is perfectly paw-picked.</span>
         </div>
       </div>
 

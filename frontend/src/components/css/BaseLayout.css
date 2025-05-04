@@ -20,6 +20,34 @@ body {
   margin-right: 15px;
 }
 
+@media (max-width: 390px) {
+  .site-logo {
+  height: 80px;
+  margin-right: 15px;
+  }
+}
+
+@media (max-width: 540px) {
+  .site-logo {
+  height: 100px;
+  margin-right: 15px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .site-logo {
+  height: 100px;
+  margin-right: 15px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .site-logo {
+  height: 100px;
+  margin-right: 15px;
+  }
+}
+
 .brand-name {
   font-size: 1.8rem;
   font-weight: bold;

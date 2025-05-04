@@ -34,20 +34,20 @@ const Footer = () => {
             {/* Company Info */}
             <div className="col-md-4 col-lg-4 col-xl-4 mx-auto mb-4">
               <h6 className="text-uppercase fw-bold mb-4">
-                <i className="fas fa-fish me-3"></i>BlueOcean Seafood Co.
+                <i className="fas fa-paw me-3"></i>PawFect Pantry Co.
               </h6>
               <p>
-                Proudly sourcing and farming sustainable seafood. Fresh from our waters to your table.
+              "Providing loving pets and premium supplies. Trusted care for your furry friends."
               </p>
             </div>
 
             {/* Hidden Product Category */}
-            <div className="d-none">
-              <h6 className="text-uppercase fw-bold mb-4">Our Fish</h6>
-              <p><a href="/catalogue" className="text-reset">Barramundi</a></p>
-              <p><a href="/catalogue" className="text-reset">Coho Salmon</a></p>
-              <p><a href="/catalogue" className="text-reset">Shrimp</a></p>
-              <p><a href="/catalogue" className="text-reset">Steelhead Trout</a></p>
+            <div className="col-md-4 col-lg-4 col-xl-2 mx-auto mb-4">
+              <h6 className="text-uppercase fw-bold mb-4">Customer Service</h6>
+              <p><a href="/delivery" className="text-reset">Shipping & Delivery</a></p>
+              <p><a href="/refunds" className="text-reset">Returns & Refunds</a></p>
+              <p><a href="/support" className="text-reset">Customer Support</a></p>
+              <p><a href="/orders/tracking" className="text-reset">Track Your Order</a></p>
             </div>
 
             {/* Useful Links */}
@@ -56,15 +56,24 @@ const Footer = () => {
               <p><a href="/faq" className="text-reset">FAQ</a></p>
               <p><a href="/privacy-policy" className="text-reset">Privacy Policy</a></p>
               <p><a href="/sitemap" className="text-reset">Sitemap</a></p>
-              <p><a href="/contact" className="text-reset">Contact Us</a></p>
+              <p>
+                <a
+                  href={`${process.env.REACT_APP_API_URL}/vendor-panel/`}
+                  className="text-reset"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >
+                  Vendor Partner
+                </a>
+              </p>
             </div>
 
             {/* Contact Info */}
             <div className="col-md-4 col-lg-4 col-xl-3 mx-auto mb-md-0 mb-4">
               <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
-              <p><i className="fas fa-home me-3"></i> 123 Ocean Drive, Florida, USA</p>
-              <p><i className="fas fa-envelope me-3"></i> info@blueoceanseafood.com</p>
-              <p><i className="fas fa-phone me-3"></i> +1 800-SEAFOOD</p>
+              <p><i className="fas fa-home me-3"></i> 123 Marina Bay, Singapore</p>
+              <p><i className="fas fa-envelope me-3"></i> info@pawfectpantry.com</p>
+              <p><i className="fas fa-phone me-3"></i> +1 800-PAWFECTPANTRY</p>
             </div>
 
           </div>
@@ -73,7 +82,7 @@ const Footer = () => {
 
       {/* Footer Bottom */}
       <div className="text-center p-4 bg-primary text-white">
-        © {new Date().getFullYear()} BlueOcean Seafood Co. All rights reserved.
+        © {new Date().getFullYear()} PawFect Pantry Co. All rights reserved.
       </div>
     </footer>
   );

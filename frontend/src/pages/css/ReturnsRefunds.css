@@ -1,0 +1,43 @@
+/* src/pages/ReturnsRefunds.css */
+
+.returns-refunds {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .returns-refunds h2 {
+    color: #2b4b3b;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+  
+  .returns-refunds h4 {
+    color: #263d30;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  
+  .returns-refunds ul {
+    list-style-type: square;
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .returns-refunds ul li {
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  
+  .returns-refunds a {
+    color: #00695c;
+    text-decoration: underline;
+  }
+  
+  .returns-refunds a:hover {
+    color: #004d40;
+  }
+  

@@ -1,14 +1,25 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.utils.text import slugify
+from django.conf import settings  # to reference AUTH_USER_MODEL safely
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    ROLE_CHOICES = [
+        ('admin', 'Admin'),
+        ('vendor', 'Vendor'),
+        ('customer', 'Customer'),
+    ]
+
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     phone = models.CharField(max_length=15, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
     address = models.TextField(blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='customer')  
     is_admin = models.BooleanField(default=False)
+    profile_image = models.ImageField(upload_to='profiles/', null=True, blank=True)  
 
     def __str__(self):
         return self.user.username
@@ -16,27 +27,32 @@ class UserProfile(models.Model):
     def get_full_name(self):
         return f"{self.user.first_name} {self.user.last_name}".strip() or self.user.username
     
-class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True)   # e.g. "Farmed Fish"
-    slug = models.SlugField(max_length=100, unique=True)   # e.g. "farmed-fish"
-    banner_image = models.ImageField(upload_to='category_banners/', blank=True, null=True)
-    description = models.TextField(blank=True)
+class Vendor(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE) 
+    business_name = models.CharField(max_length=20, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)  
+    brand_image = models.ImageField(upload_to='brand_images/', null=True, blank=True)
 
     def __str__(self):
-        return self.name
-
+        return f"{self.business_name or self.user.username}"
+    
 class Product(models.Model):
     name = models.CharField(max_length=100)
+    species = models.CharField(max_length=100, null=True, blank=True)      
+    food_type = models.CharField(max_length=100, null=True, blank=True)     
     tags = models.CharField(max_length=500, null=True, blank=True)
-    category = models.CharField(max_length=100, blank=True, null=True)  # or ForeignKey if needed
     description = models.TextField(null=True, blank=True)
     price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
     stock = models.IntegerField(default=0, null=True, blank=True)
     image = models.ImageField(upload_to='products_images/', null=True, blank=True)
     views = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
+
     
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -57,7 +73,7 @@ class OrderStatusHistory(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True)
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_items')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     quantity = models.PositiveIntegerField(default=1)
     price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
@@ -70,9 +86,7 @@ class OrderItem(models.Model):
     
 class CartItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    order = models.ForeignKey(Order, related_name='cart_items', on_delete=models.CASCADE, null=True, blank=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     quantity = models.PositiveIntegerField(default=1)
 
     def subtotal(self):
@@ -83,7 +97,20 @@ class Feedback(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.TextField()
     sentiment = models.CharField(max_length=20, blank=True, null=True) 
-    created_at = models.DateTimeField(default=timezone.now)  # ✅ instead of auto_now_add=True
+    created_at = models.DateTimeField(default=timezone.now)  
 
     def __str__(self):
         return f"{self.user.username} on {self.product.name}"
+    
+class Delivery(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='deliveries')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    company = models.CharField(max_length=20, blank=True, null=True) 
+    pick_up_time = models.DateTimeField(default=timezone.now)
+    eta = models.DateTimeField(default=timezone.now)
+    actual_delivery_time = models.DateTimeField(default=timezone.now)
+    tracking_url = models.URLField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.user.username} - Order #{self.order.id}"
+

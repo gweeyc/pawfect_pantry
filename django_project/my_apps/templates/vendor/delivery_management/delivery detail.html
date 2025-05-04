@@ -1,0 +1,75 @@
+{% extends 'admin_base.html' %}
+{% block title %}Delivery Detail{% endblock %}
+
+{% block content %}
+<style>
+  .delivery-box {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .delivery-box h2 {
+    text-align: center;
+    color: #cc0000;
+    margin-bottom: 25px;
+  }
+
+  .delivery-box p {
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+  }
+
+  .btn {
+    display: block;
+    margin: 20px auto 0;
+  }
+
+  a.tracking-link {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  a.tracking-link:hover {
+    text-decoration: underline;
+  }
+  iframe {
+    transition: transform 0.3s ease-in-out;
+  }
+  iframe:hover {
+    transform: scale(1.01);
+  }
+</style>
+
+<div class="delivery-box">
+  <h2>Delivery Details for {{ delivery.product.name }}</h2>
+  <p><strong>Customer:</strong> {{ delivery.user.username }}</p>
+  <p><strong>Pickup Time:</strong> {{ delivery.pick_up_time|date:"Y-m-d H:i" }}</p>
+  <p><strong>ETA:</strong> {{ delivery.eta|date:"Y-m-d H:i" }}</p>
+  <p><strong>Actual Delivery Time:</strong> {{ delivery.actual_delivery_time|date:"Y-m-d H:i" }}</p>
+  <p><strong>Company:</strong> {{ delivery.company|default:"-" }}</p>
+  <p><strong>Tracking:</strong> 
+    {% if delivery.tracking_url %}
+      <a href="{{ delivery.tracking_url }}" target="_blank" class="tracking-link">Track Delivery</a>
+    {% else %}
+      Not provided
+    {% endif %}
+  </p>
+  <h3 style="margin-top: 30px;">Live Map Tracking (Mock-up)</h3>
+  <div style="width: 100%; height: 400px; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+    <iframe
+      width="100%"
+      height="100%"
+      frameborder="0"
+      style="border:0"
+      src="https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY
+        &q=Singapore"
+      allowfullscreen>
+    </iframe>
+  </div>
+  <a href="{% url 'vendor_delivery_list' %}" class="btn btn-secondary">Back to Deliveries</a>
+</div>
+{% endblock %}

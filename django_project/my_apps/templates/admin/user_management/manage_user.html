@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'admin_base.html' %}
 {% block title %}Manage Users{% endblock %}
 {% block content %}
 <style>
@@ -15,6 +15,24 @@
         margin-bottom: 20px;
         color: #0077cc;
         text-align: center;
+    }
+
+    .top-actions {
+        text-align: right;
+        margin-bottom: 20px;
+    }
+
+    .top-actions a {
+        padding: 8px 16px;
+        background-color: #28a745;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+    }
+
+    .top-actions a:hover {
+        background-color: #218838;
     }
 
     table {
@@ -56,8 +74,13 @@
 
 <div class="admin-section">
     <h2>Manage Users</h2>
+
+    <div class="top-actions">
+        <a href="{% url 'user_create' %}">➕ Add New User</a>
+    </div>
+
     <table>
-        <thead>
+        <thead> 
             <tr>
                 <th>#</th>
                 <th>Username</th>

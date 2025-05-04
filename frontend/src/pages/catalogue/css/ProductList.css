@@ -28,6 +28,7 @@
 .product-card h3 {
   color: #0077cc;
   margin-bottom: 10px;
+  font-size: 24px;
 }
 
 .product-card p {
@@ -109,9 +110,29 @@
   }
 }
 
+@media (max-width: 768px) {
+  .product-img {
+    height: 180px;
+  }
+}
+
 .product-img {
   width: 100%;
-  height: 200px; /* or any fixed height you prefer */
-  object-fit: cover;
-  border-radius: 8px;
+  height: 220px; /* Or whatever height suits your card */
+  object-fit: cover;  /* Zooms in and crops to fill container */
+  border-radius: 10px;
+  border: 1px solid #eee;
+  background-color: #f9f9f9;
+  display: block;
+  margin: 0 auto 10px;
+}
+
+.kawaii_cat {
+  height: 60px;
+  margin-right: 20px;
+}
+
+.neko {
+  height: 60px;
+  margin-left: 20px;
 }

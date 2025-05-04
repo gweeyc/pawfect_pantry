@@ -1,0 +1,25 @@
+1. Create the repo on GitHub
+Go to: https://github.com/new
+
+Repository name: something like ecommerce-django-react-docker
+
+Keep it public or private (your choice)
+
+Do NOT initialize with a README, .gitignore, or license (you already have those)
+
+cd /c/Users/siewc/OneDrive/Desktop/Generation/Generation_Capstone_Ecommerce
+
+# Remove the old Git history if any (since it's showing `master` at ~)
+rm -rf .git
+
+# Re-initialize Git
+git init
+git add .
+git commit -m "Initial commit: Dockerized full-stack ecommerce project"
+
+# Add new GitHub repo URL
+git remote add origin https://github.com/asiewm01/pawfect-pantry-capstone.git
+
+# Push to GitHub
+git branch -M main
+git push -u origin main

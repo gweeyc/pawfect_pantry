@@ -1,0 +1,74 @@
+{% extends 'admin_base.html' %}
+{% block title %}Vendor Detail{% endblock %}
+
+{% block content %}
+<style>
+  .vendor-box {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .vendor-box h2 {
+    text-align: center;
+    color: #cc0000;
+    margin-bottom: 20px;
+  }
+
+  .vendor-box p {
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+  }
+
+  table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+  th {
+    background-color: #f9f9f9;
+  }
+</style>
+
+<div class="vendor-box">
+  <h2>{{ vendor.user.username }} (Vendor)</h2>
+  <p><strong>Business Name:</strong> {{ vendor.business_name|default:"N/A" }}</p>
+  <p><strong>Email:</strong> {{ vendor.user.email }}</p>
+  <p><strong>Bio:</strong> {{ vendor.user.userprofile.bio|default:"No bio provided." }}</p>
+
+  <h4>Products Listed:</h4>
+  {% if products %}
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Stock</th>
+        <th>Price</th>
+        <th>Views</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+      <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.stock }}</td>
+        <td>${{ product.price }}</td>
+        <td>{{ product.views }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>No products found for this vendor.</p>
+  {% endif %}
+</div>
+{% endblock %}

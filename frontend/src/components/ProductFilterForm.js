@@ -1,27 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './css/ProductFilterForm.css';
+import axios from '../axiosSetup';
 
 const ProductFilterForm = ({ onFilter }) => {
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('');
-  const [category, setCategory] = useState('');
+  const [species, setSpecies] = useState('');
+  const [foodType, setFoodType] = useState('');
+
+  const [speciesOptions, setSpeciesOptions] = useState([]);
+  const [foodTypeOptions, setFoodTypeOptions] = useState([]);
+
+  useEffect(() => {
+    // Fetch distinct species from backend
+    axios.get('/api/species-categories/')
+      .then(res => setSpeciesOptions(res.data))
+      .catch(err => console.warn('Failed to fetch species:', err));
+
+    // Fetch distinct food types from backend
+    axios.get('/api/food-type-categories/')
+      .then(res => setFoodTypeOptions(res.data))
+      .catch(err => console.warn('Failed to fetch food types:', err));
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onFilter({ search, sort, category });
+    onFilter({
+      search,
+      sort,
+      species,
+      food_type: foodType
+    });
   };
 
   return (
     <form className="product-filter-form" onSubmit={handleSubmit}>
       <input
         type="text"
-        name="search"
         placeholder="Search products..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
 
-      <select name="sort" value={sort} onChange={(e) => setSort(e.target.value)}>
+      <select value={sort} onChange={(e) => setSort(e.target.value)}>
         <option value="">Sort By</option>
         <option value="price_asc">Price: Low to High</option>
         <option value="price_desc">Price: High to Low</option>
@@ -29,15 +50,19 @@ const ProductFilterForm = ({ onFilter }) => {
         <option value="za">Z–A</option>
       </select>
 
-      <select name="category" value={category} onChange={(e) => setCategory(e.target.value)}>
-        <option value="">All Categories</option>
-        <option value="farmed_fish">Farmed Fish</option>
-        <option value="crustaceans">Crustaceans</option>
-        <option value="mollusc">Mollusc and Shellfish</option> {/* ✅ corrected spelling */}
-        <option value="salmon_and_tuna">Salmon & Tuna</option> {/* ✅ match backend */}
-        <option value="wild_caught_fish">Wild-Caught Fish</option>
+      <select value={species} onChange={(e) => setSpecies(e.target.value)}>
+        <option value="">All Species</option>
+        {speciesOptions.map((opt, index) => (
+          <option key={index} value={opt}>{opt}</option>
+        ))}
       </select>
 
+      <select value={foodType} onChange={(e) => setFoodType(e.target.value)}>
+        <option value="">All Food Types</option>
+        {foodTypeOptions.map((opt, index) => (
+          <option key={index} value={opt}>{opt}</option>
+        ))}
+      </select>
 
       <button type="submit">Apply</button>
     </form>

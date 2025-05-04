@@ -7,7 +7,7 @@ def root_view(request):
 
 urlpatterns = [
     path('', root_view),  # Base URL check
-    path('admin/', admin.site.urls),  # Django admin
+    path('admin/', admin.site.urls),
     path('dashboard/', include('my_apps.urls')),  # your custom views
     # ✅ Include structured app-specific routes
     path('', include('my_apps.urls')),  # customer/admin-facing views

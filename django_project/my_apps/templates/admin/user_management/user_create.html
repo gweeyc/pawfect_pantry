@@ -1,0 +1,65 @@
+{% extends 'admin_base.html' %}
+{% block title %}Create New User{% endblock %}
+
+{% block content %}
+<style>
+    .form-container {
+        max-width: 500px;
+        margin: 50px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .form-container h2 {
+        text-align: center;
+        color: #0077cc;
+        margin-bottom: 20px;
+    }
+
+    .form-container form input,
+    .form-container form button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 6px;
+    }
+
+    .form-container form input {
+        border: 1px solid #ccc;
+    }
+
+    .form-container form button {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+    .form-container form button:hover {
+        background-color: #218838;
+    }
+</style>
+
+<div class="form-container">
+    <h2>Create New User</h2>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="text" name="first_name" placeholder="First Name">
+        <input type="text" name="last_name" placeholder="Last Name">
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Create User</button>
+    </form>
+</div>
+{% endblock %}

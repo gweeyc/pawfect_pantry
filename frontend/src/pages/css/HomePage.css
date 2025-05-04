@@ -37,4 +37,66 @@
   .card-img-top {
     border-radius: 10px 10px 0 0;
   }
+  h1 {
+    font-size: 2.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #222;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+    letter-spacing: 0.5px;
+  }
+  
+  /* h2 subheading */
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 18px;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  .homepage-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 20px;
+  }
+  
+  .homepage-subtitle {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  
+  hr.solid {
+    border-top: 2px solid #a39f9f;
+  }
+  
+  .about-text p {
+    font-size: 1.2rem;       /* Increase from default 1rem */
+    line-height: 1.6;        /* Improves readability */
+    color: #333;             /* Darker, easier to read */
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+}
+
+.corgi-butt {
+  height: 60px;
+}
+
+.hedgehog {
+  height: 60px;
+}
+
+.ferret {
+  height: 60px;
+}
+
+.corgi-over-navbar {
+  height: 60px;
+  margin-left: 20px;
+}
+
+.cute-cat {
+  height: 70px;
+  margin-left: 20px;
 }

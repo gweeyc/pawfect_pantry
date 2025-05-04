@@ -20,7 +20,8 @@ def get_product_feedback(request, product_id):
         return JsonResponse({
             'id': product.id,
             'name': product.name,
-            'category': product.category.name if product.category else '',
+            'species': product.species.name if product.species else '',
+            'food_type': product.food_type.name if product.food_type else '',
             'description': product.description,
             'price': product.price,
             'stock': product.stock,
