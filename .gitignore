@@ -12,7 +12,7 @@ db.sqlite3
 env/
 venv/
 ENV/
-*.env
+# *.env
 *.pem
 instance/
 staticfiles/
@@ -42,8 +42,8 @@ local_settings.py
 /dist
 
 # misc
-.env
-.env.*.local
+# .env
+# .env.*.local
 .npm
 .DS_Store
 *.log
