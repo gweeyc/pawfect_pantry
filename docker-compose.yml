@@ -3,14 +3,15 @@ services:
     build:
       context: ./django_project
       dockerfile: Dockerfile
+    env_file:
+      - .env
+      - ./django_project/.env
     container_name: django-app
     command: ["./wait-for-it.sh", "mysql-db:3306", "-t", "60", "--", "python", "manage.py", "runserver", "0.0.0.0:8000"]
     ports:
       - "8000:8000"
     volumes:
-      - ./django_project:/app   # ✅ Only mount the Django project folder
-    env_file:
-      - ./django_project/.env  # ✅ backend secrets
+      - ./django_project:/app
     depends_on:
       - mysql-db
 
@@ -20,14 +21,14 @@ services:
       dockerfile: Dockerfile
     container_name: react-frontend
     ports:
-      - "3000:3000"
+      - "3001:3000"
     volumes:
       - ./frontend:/app
     environment:
       - CHOKIDAR_USEPOLLING=true
       - REACT_APP_API_URL=http://django-app:8000
     env_file:
-      - ./frontend/.env        # ✅ frontend build-time vars
+      - ./frontend/.env
     depends_on:
       - django-app
 

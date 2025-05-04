@@ -5,17 +5,22 @@ WORKDIR /app
 # Copy dependency files
 COPY package.json package-lock.json ./
 
-# Install all dependencies (including cross-env)
-RUN npm install
-
 # Copy the rest of the source code
 COPY . .
+
+# Install all dependencies (including cross-env)
+RUN npm install cross-env --save-dev
 
 # Build the app
 RUN npm run build
 
+# Expose the port
+EXPOSE 3001
+
 # Start the app (optional if you're using Nginx or serve later)
 CMD ["npm", "start"]
+
+
 
 
 
