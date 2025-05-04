@@ -40,7 +40,6 @@ services:
       MYSQL_DATABASE: capstone_db
       MYSQL_USER: capstone_user
       MYSQL_PASSWORD: securepassword123
-      MYSQL_ROOT_PASSWORD: s8812371i
     volumes:
       - mysql_data:/var/lib/mysql
     ports:
