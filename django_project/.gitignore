@@ -9,12 +9,11 @@ __pycache__/
 *.pyc
 local_settings.py
 db.sqlite3
-media/
 staticfiles/
 
 # Envs and secrets
-# .env
-# *.env
+.env
+*.env
 
 # VSCode or IDE
 .vscode/
