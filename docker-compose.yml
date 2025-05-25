@@ -37,6 +37,7 @@ services:
     container_name: mysql-db
     restart: always
     environment:
+      MYSQL_ROOT_PASSWORD: adminpass
       MYSQL_DATABASE: capstone_db
       MYSQL_USER: capstone_user
       MYSQL_PASSWORD: securepassword123
